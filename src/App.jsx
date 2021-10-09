@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import PokedexPage from './pages/PokedexPage';
 import PokemonPage from './pages/PokemonPage';
-import './App.css';
 
 function App() {
   return (

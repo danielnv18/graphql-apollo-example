@@ -1,8 +1,8 @@
 import React from 'react';
+import PokemonList from '../components/PokemonList';
 
 function PokedexPage() {
-  console.log('PokedexPage');
-  return <div>PokedexPage</div>;
+  return <PokemonList />;
 }
 
 export default PokedexPage;
