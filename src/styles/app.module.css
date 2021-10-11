@@ -1,0 +1,28 @@
+.root {
+  background-image: url('../img/body_bg.png');
+  padding: 20px;
+}
+
+.container {
+  max-width: 1280px;
+  background: #fff url('../img/container_bg.png');
+  margin: 0 auto;
+}
+
+.pokedex {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #fff;
+}
+
+.pokemonTeaser {
+  background: #f2f2f2;
+  border-radius: 5px;
+  margin: 0 0 10px 0;
+  width: 210px;
+  height: 210px;
+}

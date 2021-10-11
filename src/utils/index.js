@@ -3,5 +3,5 @@ export const getIdFromUrl = (url) => {
     .substring(0, url.length - 1)
     .split('/')
     .pop();
-  return parseInt(id);
+  return id;
 };

@@ -1,16 +1,20 @@
 import React from 'react';
-import Loading from './Loading';
 import { getIdFromUrl } from '../utils';
 import { getPokemonImageDetail } from '../utils/image';
+import clasess from '../styles/app.module.css';
 
 const PokemonItem = ({ name, url }) => {
   const id = getIdFromUrl(url);
   const imgageUrl = getPokemonImageDetail(id);
   return (
-    <figure>
-      <img height={215} width={215} src={imgageUrl} alt={name} />
-      {name[0].toUpperCase() + name.substring(1)}
-    </figure>
+    <div>
+      <figure className={clasess.pokemonTeaser}>
+        <img height={205} width={205} src={imgageUrl} alt={name} />
+      </figure>
+      <span>
+        #{id.padStart(3, 0)} - {name[0].toUpperCase() + name.substring(1)}
+      </span>
+    </div>
   );
 };
 

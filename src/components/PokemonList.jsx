@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PokemonTeaser from './PokemonTeaser';
 import { getPokemonList } from '../utils/http';
+import clasess from '../styles/app.module.css';
 
 const PokemonList = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -15,14 +16,13 @@ const PokemonList = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Pokemon List</h1>
-      <div>
+    <>
+      <section className={clasess.pokedex}>
         {pokemons.map((pokemon) => (
           <PokemonTeaser {...pokemon} key={pokemon.url} />
         ))}
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
