@@ -7,11 +7,13 @@ import clasess from './styles/app.module.css';
 function App() {
   return (
     <div className={clasess.root}>
-      <Switch>
-        <Route path="/pokedex/:id" component={PokemonPage} />
-        <Route path="/pokedex" component={PokedexPage} />
-        <Redirect from="/" to="/pokedex" />
-      </Switch>
+      <div className={clasess.container}>
+        <Switch>
+          <Route path="/pokedex/:id" component={PokemonPage} />
+          <Route path="/pokedex" component={PokedexPage} />
+          <Redirect from="/" to="/pokedex" />
+        </Switch>
+      </div>
     </div>
   );
 }

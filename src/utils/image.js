@@ -11,10 +11,10 @@ export function getPokemonImageDetail(pokeID) {
 
 /**
  * Gets sprite pokemon image
- * @param {integer|string} pokeID
+ * @param {integer} pokeID
  * @returns
  */
-export function createPokemonImageSprite(pokeID) {
+export function getPokemonImageFull(pokeID) {
   return `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokeID
     .toString()
     .padStart(3, '0')}.png`;

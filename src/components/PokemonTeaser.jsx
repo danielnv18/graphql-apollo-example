@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { getIdFromUrl } from '../utils';
 import { getPokemonImageDetail } from '../utils/image';
 import clasess from '../styles/app.module.css';
 
-const PokemonItem = ({ name, url }) => {
+const PokemonTeaser = ({ name, url }) => {
   const id = getIdFromUrl(url);
   const imgageUrl = getPokemonImageDetail(id);
   return (
@@ -22,7 +21,7 @@ const PokemonItem = ({ name, url }) => {
         </figure>
       </Link>
 
-      <Link to={`/pokedex/${id}`} className={clasess.pokemonTeaserLink}>
+      <Link to={`/pokedex/${name}`} className={clasess.pokemonTeaserLink}>
         <h5>
           #{id.padStart(3, 0)} - {name[0].toUpperCase() + name.substring(1)}
         </h5>
@@ -31,4 +30,4 @@ const PokemonItem = ({ name, url }) => {
   );
 };
 
-export default PokemonItem;
+export default PokemonTeaser;
