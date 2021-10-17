@@ -15,7 +15,7 @@ async function get(url) {
  * @returns
  */
 export function getPokemon(id) {
-  return get(`pokemon/${id}`);
+  return get(`pokemon/${id}?limit=151`);
 }
 
 /**
