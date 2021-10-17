@@ -15,12 +15,12 @@ async function get(url) {
  * @returns
  */
 export function getPokemon(id) {
-  return get(`pokemon/${id}?limit=151`);
+  return get(`pokemon/${id}`);
 }
 
 /**
  * Get list of pokemon
  */
 export function getPokemonList() {
-  return get('pokemon');
+  return get('pokemon?limit=151');
 }
