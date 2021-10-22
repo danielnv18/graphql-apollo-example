@@ -9,7 +9,7 @@ const PokemonTeaser = ({ name, url }) => {
   const imgageUrl = getPokemonImageDetail(id);
   return (
     <div>
-      <Link to={`/pokedex/${id}`}>
+      <Link to={`/pokedex/${name}`}>
         <figure className={clasess.pokemonTeaser}>
           <img
             height={205}
