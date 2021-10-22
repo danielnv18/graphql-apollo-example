@@ -55,9 +55,13 @@ const PokemonDetail = ({ id }) => {
         </p>
         <p>
           <span>Abilities: </span>
-          {pokemon.abilities.map((ability) => (
-            <span key={ability.ability.name}>{ability.ability.name}</span>
-          ))}
+          <ul>
+            {pokemon.abilities.map((ability) => (
+              <li key={ability.ability.name}>
+                <p>{ability.ability.name}</p>
+              </li>
+            ))}
+          </ul>
         </p>
       </div>
     </div>

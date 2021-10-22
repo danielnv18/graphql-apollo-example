@@ -1,6 +1,7 @@
 .pokemonImage {
   border-radius: 5px;
   background: var(--color-grey);
+  text-align: center;
 }
 
 .pokemonDetail {
