@@ -1,7 +1,7 @@
 .root {
   background-image: url('../img/body_bg.png');
   padding: 20px;
-  height: calc(100vh - 40px);
+  min-height: calc(100vh - 40px);
 }
 
 .container {
