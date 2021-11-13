@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getIdFromUrl } from '../utils';
 import { getPokemonImageDetail } from '../utils/image';
 import clasess from '../styles/app.module.css';
 
-const PokemonTeaser = ({ name, url }) => {
-  const id = getIdFromUrl(url);
+const PokemonTeaser = ({ name, id }) => {
   const imgageUrl = getPokemonImageDetail(id);
   return (
     <div>
@@ -23,7 +21,7 @@ const PokemonTeaser = ({ name, url }) => {
 
       <Link to={`/pokedex/${name}`} className={clasess.pokemonTeaserLink}>
         <h5>
-          #{id.padStart(3, 0)} - {name[0].toUpperCase() + name.substring(1)}
+          #{id.toString().padStart(3, 0)} - {name[0].toUpperCase() + name.substring(1)}
         </h5>
       </Link>
     </div>
