@@ -1,25 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery, gql } from '@apollo/client';
 import PokemonTeaser from './PokemonTeaser';
-import { getPokemonList } from '../utils/http';
 import clasess from '../styles/app.module.css';
+import Loading from './Loading';
+
+const POKEMON_LIST = gql`
+  query listOfPokemons {
+    pokemons: pokemon_v2_pokemon(limit: 151) {
+      id
+      name
+      types: pokemon_v2_pokemontypes {
+        type: pokemon_v2_type {
+          name
+        }
+      }
+    }
+  }
+`;
 
 const PokemonList = () => {
-  const [pokemons, setPokemons] = useState([]);
+  const { loading, error, data } = useQuery(POKEMON_LIST);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getPokemonList();
-      setPokemons(response.results);
-    }
-
-    fetchData();
-  }, []);
+  if (loading) return <Loading />;
+  if (error) return <p>Error :(</p>;
 
   return (
     <>
       <section className={clasess.pokedex}>
-        {pokemons.map((pokemon) => (
-          <PokemonTeaser {...pokemon} key={pokemon.url} />
+        {data.pokemons.map((pokemon) => (
+          <PokemonTeaser {...pokemon} key={pokemon.id} />
         ))}
       </section>
     </>
