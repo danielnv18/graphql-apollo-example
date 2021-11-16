@@ -1,64 +1,84 @@
-import React, { useEffect, useState } from 'react';
-import { getPokemon } from '../utils/http';
+import React from 'react';
+import { useQuery, gql } from '@apollo/client';
 import Loading from './Loading';
 import { getPokemonImageFull } from '../utils/image';
 import clasess from '../styles/pokemon.module.css';
 
-const PokemonDetail = ({ id }) => {
-  const [pokemon, setPokemon] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getPokemon(id).then((pokemon) => setPokemon(pokemon) && setLoading(false));
-  }, [id]);
-
-  // Render loading if pokemon is not loaded
-  if (loading && Object.keys(pokemon).length === 0) {
-    return <Loading />;
+const POKEMON_DETAIL = gql`
+  query listOfPokemons($name: String!) {
+    pokemon: pokemon_v2_pokemon(where: { name: { _eq: $name } }) {
+      id
+      name
+      height
+      weight
+      abilities: pokemon_v2_pokemonabilities {
+        ability: pokemon_v2_ability {
+          id
+          name
+        }
+      }
+      types: pokemon_v2_pokemontypes {
+        type: pokemon_v2_type {
+          id
+          name
+        }
+      }
+    }
   }
+`;
+
+const PokemonDetail = (props) => {
+  const { loading, error, data } = useQuery(POKEMON_DETAIL, {
+    variables: { name: props.id },
+  });
+
+  if (loading) return <Loading />;
+  if (error) return <p>Error :(</p>;
+
+  const { pokemon } = data;
+  const { id, name, height, weight, types, abilities } = pokemon[0];
+  console.log(types);
 
   return (
     <div className={clasess.pokemonDetail}>
       <div className={clasess.pokemonImage}>
         <img
-          src={getPokemonImageFull(pokemon.id)}
+          src={getPokemonImageFull(id)}
           width={430}
           height={430}
-          alt={pokemon.name}
+          alt={name}
           loading="lazy"
         />
       </div>
       <div className={clasess.pokemonInfo}>
-        <h1>{pokemon.name}</h1>
+        <h1>{name}</h1>
         <p>
           <span>Type: </span>
-          {pokemon.types.map((type) => (
+          {types.map(({ type }) => (
             <span
-              key={type.type.name}
+              key={type.id}
               className={
-                clasess[`color${type.type.name}`] +
-                ' ' +
-                clasess.pokemonAttribute
+                clasess[`color${type.name}`] + ' ' + clasess.pokemonAttribute
               }
             >
-              {type.type.name}
+              {type.name}
             </span>
           ))}
         </p>
         <p>
           <span>Height: </span>
-          {pokemon.height}
+          {height}
         </p>
         <p>
           <span>Weight: </span>
-          {pokemon.weight}
+          {weight}
         </p>
         <p>
           <span>Abilities: </span>
           <ul>
-            {pokemon.abilities.map((ability) => (
-              <li key={ability.ability.name}>
-                <p>{ability.ability.name}</p>
+            {abilities.map(({ ability }) => (
+              <li key={ability.id}>
+                <p>{ability.name}</p>
               </li>
             ))}
           </ul>
